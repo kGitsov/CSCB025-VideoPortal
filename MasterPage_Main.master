@@ -1,0 +1,30 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage_Main.master.cs" Inherits="MasterPage" %>
+<%@ Register Src="~/controls/AutheticationControl.ascx" TagName="AutheticationControl" TagPrefix="uc3" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<form id="form" runat="server">
+<head runat="server">
+    <title>CSCB025 - Video platform</title>
+    <uc3:AutheticationControl ID="AutheticationControl" runat="server" />
+    <link href="../css/style.css" rel="stylesheet" type="text/css" />
+        <div id="logo">
+            <img id="logoimg" src="../images/logo.jpg"  style="width: 160px; height:77px"/>
+            <div id="clear"></div>                    
+        </div>
+    <asp:ContentPlaceHolder id="head" runat="server">
+
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div id="outer">
+        <div id="mainContent">
+            <asp:ContentPlaceHolder id="wrapper" runat="server">
+        
+            </asp:ContentPlaceHolder>
+        </div>  
+    </div>  
+</body>
+</form>
+</html>

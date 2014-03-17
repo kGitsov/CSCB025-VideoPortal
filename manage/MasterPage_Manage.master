@@ -1,0 +1,36 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage_Manage.master.cs" Inherits="manage_MasterPage_Manage" %>
+<%@ Register Src="~/controls/AutheticationControl.ascx" TagName="AutheticationControl" TagPrefix="uc3" %>
+<%@ Register Src="~/controls/LoopCategoriesControl.ascx" TagName="LoopCategories" TagPrefix="ul1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<form id="form" runat="server">
+    <head runat="server">
+        <title>Administration panel</title>
+        <uc3:AutheticationControl ID="AutheticationControl" runat="server" />
+        <link href="../css/style.css" rel="stylesheet" type="text/css" />
+        <div id="logo">
+            <img id="logoimg" src="../images/logo.jpg"  style="width: 160px; height:77px"/>
+            <div id="clear"></div>                    
+        </div>
+        <asp:ContentPlaceHolder id="head" runat="server">
+            <!-- to be -->
+        </asp:ContentPlaceHolder>
+    </head>
+    <body>
+        <div id="outer">
+            <div id="left">
+                
+                <ul1:LoopCategories ID="LoopCategories" runat="server" />                
+                                    
+            </div>
+            <div id="content">
+                <asp:contentplaceholder id="wrapper" runat="server">
+                    <!-- content here -->
+                </asp:contentplaceholder>
+            </div>
+        </div>   
+    </body>
+</form>
+</html>
