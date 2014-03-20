@@ -1,13 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="manage_Login" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage_Main.master" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="manage_Login" %>
+<%@ Register Src="~/controls/TopnavigationButtonsControl.ascx" TagName="TopNavigation" TagPrefix="ulT" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <ulT:TopNavigation ID="TopNavigation" runat="server" />
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="wrapper" Runat="Server">    
     <div>
     Username:<br />
     <asp:TextBox ID="txtName" runat="server" Width="89px"></asp:TextBox><br />
@@ -15,6 +12,4 @@
     <asp:TextBox ID="txtPass" runat="server" TextMode="Password" Width="89px"></asp:TextBox><br />
     <asp:Button ID="btnLogin" runat="server" Text="Login" OnClick="btnLogin_Click" />
     </div>
-    </form>
-</body>
-</html>
+</asp:Content>
