@@ -45,11 +45,11 @@ public partial class manage_Login : System.Web.UI.Page
             Session["userName"] = sdr["username"];
             string temp = sdr["isAdmin"].ToString();
             Session["isAdmin"] = sdr["isAdmin"].ToString();
-            RegisterStartupScript("false", "<script>alert('Hi user!'); location='../Default.aspx'</script>");
+            RegisterStartupScript("false", "<script>alert('Hi user!'); location='/Default.aspx'</script>");
         }
         else
         {
-            RegisterStartupScript("false", "<script>alert('Login FAILED!'); location='../manage/Login.aspx'</script>");
+            RegisterStartupScript("false", "<script>alert('Login FAILED!'); location='/Login.aspx'</script>");
         
         }
     }

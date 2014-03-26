@@ -2,8 +2,13 @@
 <div id="user">
     <div id="topLeft">
     <asp:Panel ID="adminpanel" runat="server" Direction="LeftToRight">
-        <a href="../manage/admin.aspx">Administration panel</a>
-        
+        <a href="../manage/admin.aspx">Administration panel</a>        
+    </asp:Panel>
+    <asp:Panel ID="homepanel" runat="server" Direction="LeftToRight">
+        <a href="../default.aspx">Home</a>
+    </asp:Panel>
+    <asp:Panel ID="uploadpanel" runat="server" Direction="LeftToRight" >
+        <a href="../embed.aspx">Embed video</a>
     </asp:Panel>
     </div>
 

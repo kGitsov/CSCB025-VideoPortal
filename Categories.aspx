@@ -3,10 +3,10 @@
 <%@ Register Src="~/controls/CategoriesListingVideosControl.ascx" TagName="CategoriesListing" TagPrefix="ulC" %>
 
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="headContent" ContentPlaceHolderID="head" Runat="Server">
     <ulT:TopNavigation ID="TopNavigation" runat="server" />
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="wrapper" Runat="Server">
+<asp:Content ID="wrapperContent" ContentPlaceHolderID="wrapper" Runat="Server">
     
     <ulC:CategoriesListing ID="CategoriesListing" runat="server" />
 </asp:Content>

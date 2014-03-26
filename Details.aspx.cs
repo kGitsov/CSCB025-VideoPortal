@@ -8,7 +8,6 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 public partial class Details : System.Web.UI.Page
 {
@@ -16,10 +15,10 @@ public partial class Details : System.Web.UI.Page
     public string sex;
     public string country;
     public string city;
-    public Bitmap bitmap;
     public string imgUrl;
     public string firstName;
     public string lastName;
+    public string folder_path;
     public DateTime registerDate;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -44,23 +43,14 @@ public partial class Details : System.Web.UI.Page
             lastName = sdrPr["lastName"].ToString();
             registerDate = (DateTime)sdrPr["registerDate"];
 
+            string folder_path = "/Pictures/";
             SqlConnection con = operateData.createCon();
             con.Open();
-            SqlDataAdapter sda = new SqlDataAdapter(sql, con);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
-            DataRow row = dt.Rows[0];
-            byte[] imgBytes = (byte[])row["img"];
-            System.Web.UI.WebControls.Image img = new System.Web.UI.WebControls.Image();
-
-            string filePath = Server.MapPath("temp") + "//" + "img" + DateTime.Now.Ticks.ToString() + ".png";
-            FileStream fs = File.Create(filePath);
-            fs.Write(imgBytes, 0, imgBytes.Length);
-            fs.Flush();
-            fs.Close();
-
-            profileImage.ImageUrl = filePath;
-            
+            SqlCommand com = new SqlCommand(sql, con);
+            SqlDataReader sdrp = com.ExecuteReader();
+            sdrp.Read();
+            folder_path += sdrp["imgPath"].ToString();
+            profileImage.ImageUrl = folder_path;
         }
         else
         {
@@ -76,22 +66,60 @@ public partial class Details : System.Web.UI.Page
     {
         if (FileUpload.HasFile)
         {
-            /*
-             * MemoryStream ms = new MemoryStream(bytes);
-            System.Drawing.Image img = System.Drawing.Image.FromStream(ms);
-            Response.ContentType = "image/jpeg"; //or whatever mime type you have
-            img.Save(Response.OutputStream, System.Drawing.Imaging.ImageFormat.Jpeg);
-             * /
-             */
-            MemoryStream ms = new MemoryStream(FileUpload.FileBytes);
-            System.Drawing.Image img = System.Drawing.Image.FromStream(ms);
-            /*INSERT INTO Customers (CustomerName, Country)
-SELECT SupplierName, Country FROM Suppliers
-WHERE Country='Germany';*/
+            string sql = "select * from users where username='" + Session["userName"] + "'";
+            SqlDataReader sdr = operateData.getRow(sql);
+            sdr.Read();
+            id = Int32.Parse(sdr["Id"].ToString());
 
-            string sql = "update profiles set img='" + img+"' where userId='" + id + "'";
+            sql = "select * from profiles where userId='" + id + "'";
+            SqlDataReader sdrPr = operateData.getRow(sql);
+            sdrPr.Read();
+
+            if (sdrPr["imgPath"]!= null)
+            {
+                string oldName = sdrPr["imgPath"].ToString();
+                File.Delete(Server.MapPath(Request.ApplicationPath) + "Pictures/" + oldName);
+            }
+            
+            string newName = DateTime.Now.ToString("mmddyyyy_HHmmss") + Path.GetExtension(FileUpload.FileName);
+            string folder_path = Server.MapPath("~\\Pictures\\");
+            FileUpload.SaveAs(folder_path + newName);
+            sql = "update profiles set imgPath='" + newName + "' where userId='" + id + "'";
             operateData.execSql(sql);
             
         }
+    }
+    protected void EditProfile_Click(object sender, EventArgs e)
+    {
+        if (EditPanel.Visible == false)
+        {
+            EditPanel.Visible = true;
+        }
+        else
+        {
+            EditPanel.Visible = false;
+        }        
+    }
+    protected void SaveProfile_Click(object sender, EventArgs e)
+    {
+        firstName = EditFirstName.Text.ToString();
+        lastName = EditLastName.Text.ToString();
+        country = EditCountry.Text.ToString();
+        city = EditCity.Text.ToString();
+        if (MaleRadio.Checked)
+        {
+            sex = "male";
+        }
+        else
+        {
+            sex = "female";
+        }
+
+        string sql = "update profiles set firstName='" + firstName +
+                                        "', lastName='" + lastName +
+                                        "', country='" + country +
+                                        "', city='" + city +
+                                        "', sex='" + sex + "'";
+        operateData.execSql(sql);
     }
 }

@@ -15,6 +15,7 @@ public partial class controls_AutheticationControl : System.Web.UI.UserControl
             Nickname.Text = Session["userName"].ToString();
             WelcomePanel.Visible = true;
             LoginPanel.Visible = false;
+            uploadpanel.Visible = true;
         }
         else
         {
@@ -23,15 +24,20 @@ public partial class controls_AutheticationControl : System.Web.UI.UserControl
             WelcomePanel.Visible = false;
             LoginPanel.Visible = true;
             adminpanel.Visible = false;
+            uploadpanel.Visible = false;
             //Response.Redirect("~/Login.aspx");
         }
         if (Session["isAdmin"] != null && Session["isAdmin"].ToString() == "True")
         {
-            adminpanel.Visible = true;
+            adminpanel.Visible = true; 
+            homepanel.Visible = true;
+            uploadpanel.Visible = true;
         }
         else
         {
             adminpanel.Visible = false;
+            homepanel.Visible = true;
+            //uploadpanel.Visible = true;
         }
     }
 
@@ -45,6 +51,7 @@ public partial class controls_AutheticationControl : System.Web.UI.UserControl
         LoginPanel.Visible = true;
         adminpanel.Visible = false;
         Response.Redirect("~/Default.aspx");
+        uploadpanel.Visible = false;
         
     }
 }

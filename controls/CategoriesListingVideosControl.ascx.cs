@@ -46,7 +46,7 @@ public partial class controls_CategoriesListingVideosControl : System.Web.UI.Use
         string outVideoLink = "</a>";
         generateVideo.Controls.Add(new LiteralControl("<div id='video'>" + videoLink));
         Image img = new Image();
-        img.ImageUrl = item["videoPicture"].ToString();
+        img.ImageUrl = item["imgPath"].ToString();
         img.ID = "videoPicture";
         img.Width = 180;
         img.Height = 100;

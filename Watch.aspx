@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage_Main.master" AutoEventWireup="true" CodeFile="Watch.aspx.cs" Inherits="Watch" %>
 <%@ Register Src="~/controls/TopnavigationButtonsControl.ascx" TagName="TopNavigation" TagPrefix="ulT" %>
+<%@ Register Src="~/controls/FindCommentsAndListControl.ascx" TagName="FindComments" TagPrefix="ulF" %>
 
 <asp:Content ID="headContent" ContentPlaceHolderID="head" Runat="Server">
     <ulT:TopNavigation ID="TopNavigation" runat="server" />
@@ -13,6 +14,6 @@
         <embed src="<%=srcLink %>" type="application/x-shockwave-flash" width="560" height="315" allowscriptaccess="always" allowfullscreen="true"></embed>
 
     </object>
-
+    <ulF:FindComments ID="FindComments" runat="server" />
 </asp:Content>
 

@@ -76,7 +76,7 @@ public partial class Register : System.Web.UI.Page
                         con.Open();
                         com.ExecuteNonQuery();
                         con.Close();
-                        Response.Redirect("../Default.aspx");
+                        Response.Redirect("/Default.aspx");
                     }
                     else
                     {

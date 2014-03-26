@@ -36,8 +36,8 @@ public partial class controls_TopRecentVideosControl : System.Web.UI.UserControl
         string outVideoLink = "</a>";
         generateVideo.Controls.Add(new LiteralControl("<div id='video'>" + videoLink));
         Image img = new Image();
-        img.ImageUrl = item["videoPicture"].ToString();
-        img.ID = "videoPicture";
+        img.ImageUrl = item["imgPath"].ToString();
+        img.ID = "imgPath";
         img.Width = 180;
         img.Height = 100;
         generateVideo.Controls.Add(img);
