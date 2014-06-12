@@ -34,6 +34,12 @@ public partial class controls_LoopCategoriesControl : System.Web.UI.UserControl
         users.NavigateUrl = "../manage/users.aspx";
 
         MenuLeft.Items.Add(users);
+
+        MenuItem comments = new MenuItem();
+        comments.Text = "Comments";
+        comments.NavigateUrl = "../manage/comments.aspx";
+
+        MenuLeft.Items.Add(comments);
     }
 
 

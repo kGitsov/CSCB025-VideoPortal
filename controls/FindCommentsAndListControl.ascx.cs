@@ -14,6 +14,7 @@ public partial class controls_FindCommentsAndListControl : System.Web.UI.UserCon
     public string username;
     public string content;
     public DateTime date;
+    public string imgPath;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -26,7 +27,7 @@ public partial class controls_FindCommentsAndListControl : System.Web.UI.UserCon
         foreach (DataRow item in dt.Rows)
         {
             userId = Int32.Parse(item["userId"].ToString());
-            sql = "select userName from users where id='"+userId+"'";
+            sql = "select userName, imgPath from users, profiles where users.id='"+userId+"' and profiles.userId='"+userId+"'";
 
             SqlConnection con = operateData.createCon();
             con.Open();
@@ -36,6 +37,7 @@ public partial class controls_FindCommentsAndListControl : System.Web.UI.UserCon
             item["userName"] = sdr["userName"].ToString();
             username = item["userName"].ToString();
             date = (DateTime)item["date"];
+            imgPath = sdr["imgPath"].ToString();
             ListCommentsBelow(item);
 
             con.Close();
@@ -47,7 +49,8 @@ public partial class controls_FindCommentsAndListControl : System.Web.UI.UserCon
     {
         string userLink = "<a href='../user.aspx?id=" + userId + "'>" + username + "</a>";
         //string outUserLink = "</a>";
-        
+        generateComment.Controls.Add(new LiteralControl("<a href='user.aspx?id="+userId+"'><img src='Pictures/" + imgPath + "' width='100px' height='100px'/></a>"));
+        generateComment.Controls.Add(new LiteralControl("<br/>"));
         generateComment.Controls.Add(new LiteralControl("<div id='commentedUser'>" + userLink + "</div>"));
         generateComment.Controls.Add(new LiteralControl("<br/>"));
         generateComment.Controls.Add(new LiteralControl("<div id='commentDate'>" + date + "</div>"));

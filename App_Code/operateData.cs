@@ -77,6 +77,15 @@ public class operateData
         return Ex;
     }
 
+    public static string getUserId(string username)
+    {
+        string sql = "select Id from users where username='"+ username +"'";
+        SqlDataReader sdr = getRow(sql);
+        sdr.Read();  
+      
+        return sdr["Id"].ToString();
+    }
+
     public static string getTier(string sql)
     {
 
